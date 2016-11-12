@@ -1,0 +1,17 @@
+{
+  "name": "color-of-music",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "behaviorify": "^1.0.0",
+    "jibo": "^3.0.0",
+    "rapidapi-connect": "0.0.2",
+    "array-from": "^2.0.2",
+    "pixi.js": "^4.0.3"
+  },
+  "license": "UNLICENSED"
+}
