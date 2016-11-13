@@ -7,11 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "behaviorify": "^1.0.0",
-    "jibo": "^3.0.0",
-    "rapidapi-connect": "0.0.2",
     "array-from": "^2.0.2",
-    "pixi.js": "^4.0.3"
+    "behaviorify": "^1.0.0",
+    "clarifai": "^2.0.15",
+    "imgur": "^0.1.7",
+    "jibo": "^3.0.0",
+    "pixi.js": "^4.0.3",
+    "rapidapi-connect": "0.0.2",
+    "request": "^2.78.0"
   },
   "license": "UNLICENSED"
 }
