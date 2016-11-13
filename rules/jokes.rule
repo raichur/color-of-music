@@ -1,0 +1,7 @@
+TopRule = $* (win the competition){joke = "Clearly not you guys"}
+            | (good am I){joke = "You used to be in your...Prime"}
+            | (good is our project){joke = "It's alright, but I won't judge"}
+            | (tell me a joke){joke = "Your project"}
+            | (you so slow){joke = "I would be swift but my circuits got fried"}
+            | (love you){joke = "hop off you ugly"} $*;
+
