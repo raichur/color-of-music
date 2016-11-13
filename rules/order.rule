@@ -1,0 +1,1 @@
+TopRule = $* (photo of me){photo='me'}| (photo of my drawing){photo='drawing'} $*;
