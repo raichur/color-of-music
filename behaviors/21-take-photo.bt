@@ -9,6 +9,7 @@
             "8db6f060-1d44-481b-8df6-17b90470b7ea",
             "7fb7c0c7-f9ee-4b7b-bc67-e73fccea30a7",
             "f615089e-9b01-4ee7-8c27-1e6ee68c462c",
+            "7731d418-a140-4ab7-a369-5f37fc47297f",
             "009578b6-abf7-448a-9181-e619c976e7d5",
             "7653fd4d-38be-43be-87e8-ca9e72cc9035",
             "c382e28c-8998-4c2c-86c1-7c0afc7e9fdb"
@@ -29,14 +30,13 @@
                 "  ",
                 "  // put the photo's URL on the notepad",
                 "  notepad.imageUrl = imageUrl;",
-                "  notepad.track = \"Something about us\";",
+                "  notepad.trackQuery = \"Something about us\";",
                 "  notepad.selectedEmotion = \"happy\";",
                 "  const RapidAPI = require('rapidapi-connect');",
                 "  const rapid = new RapidAPI('MusicPainter', '222b060f-6e25-4272-ae8e-a26f235106ce');",
                 "  var imgur = require('imgur');",
                 "  imgur.setClientId('77b03c9d1fab0cc');",
                 "",
-                "  ",
                 "  let request = require('request').defaults({ encoding: null });",
                 "  ",
                 "  request(imageUrl, function (error, response, body) {",
@@ -95,17 +95,16 @@
                 "      tag: emotion,",
                 "      handlers: {",
                 "        success: function(data) {",
-                "          var track = data.tracks.track[Math.floor(Math.random()*data.tracks.track.length)].name;",
-                "          console.log(track);",
+                "          notepad.trackQuery = data.tracks.track[Math.floor(Math.random()*data.tracks.track.length)].name;",
+                "          console.log(notepad.trackQuery);",
                 "          rapid.call('SpotifyPublicAPI', 'searchTracks', { ",
-                "            'query': track,",
+                "            'query': notepad.trackQuery,",
                 "            'market': '',",
                 "            'limit': '1',",
                 "            'offset': ''  ",
                 "          }).on('success', function(payload) {",
                 "            console.log(JSON.parse(payload).tracks.items[0].preview_url);",
                 "            notepad.track = JSON.parse(payload).tracks.items[0].preview_url;",
-                "            ",
                 "            jibo.sound.add();",
                 "            ",
                 "            notepad.sound = jibo.sound.add('bleep', {",
@@ -117,8 +116,9 @@
                 "              block: false,                // allow other sounds to play over this sound? (false by default)",
                 "              useXHR: true,  //commented out, neccesary to use if your src is set to an external URL",
                 "            });",
-                "            jibo.sound.play('bleep'); ",
                 "            ",
+                "            jibo.sound.play('bleep');     ",
+                "",
                 "          }).on('error', function(payload) {",
                 "            console.log(payload); ",
                 "          });",
@@ -191,7 +191,7 @@
             "183e8b3c-372e-4a38-88be-caf4385eaec1",
             "5e54f107-058e-4a4c-bc70-37564778999f",
             6,
-            "c3b236c4-0f76-48a4-a8e1-b4cb6d9e4447"
+            "fff1d1a8-eda1-4dac-a2bb-3650bcd8f209"
         ]
     },
     "183e8b3c-372e-4a38-88be-caf4385eaec1": {
@@ -239,7 +239,7 @@
                 "  ",
                 "  // add the sprite to the stage",
                 "  jibo.face.stage.addChild(notepad.photo);",
-                "",
+                "  ",
                 "  ",
                 "}"
             ]
@@ -366,17 +366,6 @@
         "asset-pack": "core",
         "parent": 1
     },
-    "c3b236c4-0f76-48a4-a8e1-b4cb6d9e4447": {
-        "id": "c3b236c4-0f76-48a4-a8e1-b4cb6d9e4447",
-        "class": "Switch",
-        "name": "",
-        "options": {},
-        "asset-pack": "core",
-        "parent": "f615089e-9b01-4ee7-8c27-1e6ee68c462c",
-        "children": [
-            "b76ec2d0-9302-4b11-a04c-b44e9055cab4"
-        ]
-    },
     "b76ec2d0-9302-4b11-a04c-b44e9055cab4": {
         "id": "b76ec2d0-9302-4b11-a04c-b44e9055cab4",
         "class": "PlayAnimation",
@@ -389,13 +378,39 @@
             ]
         },
         "asset-pack": "core",
-        "parent": "c3b236c4-0f76-48a4-a8e1-b4cb6d9e4447",
+        "parent": "fff1d1a8-eda1-4dac-a2bb-3650bcd8f209",
         "decorators": [
-            "d9fc9d34-36c6-47ec-8af1-f4c5c082de01"
+            "de8aff89-57b9-4841-bb2d-52c90a0cce19"
         ]
     },
-    "d9fc9d34-36c6-47ec-8af1-f4c5c082de01": {
-        "id": "d9fc9d34-36c6-47ec-8af1-f4c5c082de01",
+    "7731d418-a140-4ab7-a369-5f37fc47297f": {
+        "id": "7731d418-a140-4ab7-a369-5f37fc47297f",
+        "class": "ExecuteScript",
+        "name": "",
+        "options": {
+            "exec": [
+                "() => {",
+                "  jibo.sound.add();",
+                "  ",
+                "  notepad.sound = jibo.sound.add('bleep', {",
+                "    ",
+                "    src: notepad.track,  // location in file system",
+                "    preload: false,              // start loading the sound right away?",
+                "    autoPlay: false,             // start playing the sound immediately after loading?",
+                "    loop: false,                // loop my sound? (false by default)",
+                "    block: false,                // allow other sounds to play over this sound? (false by default)",
+                "    useXHR: true,  //commented out, neccesary to use if your src is set to an external URL",
+                "  });",
+                "  ",
+                "  jibo.sound.play('bleep'); ",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 1
+    },
+    "de8aff89-57b9-4841-bb2d-52c90a0cce19": {
+        "id": "de8aff89-57b9-4841-bb2d-52c90a0cce19",
         "class": "Case",
         "name": "",
         "options": {
@@ -406,5 +421,47 @@
             ]
         },
         "asset-pack": "core"
+    },
+    "fff1d1a8-eda1-4dac-a2bb-3650bcd8f209": {
+        "id": "fff1d1a8-eda1-4dac-a2bb-3650bcd8f209",
+        "class": "Switch",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "f615089e-9b01-4ee7-8c27-1e6ee68c462c",
+        "children": [
+            "b76ec2d0-9302-4b11-a04c-b44e9055cab4",
+            "4d7d1ff3-7c05-4f82-bcff-2c2c6005a1d6"
+        ]
+    },
+    "170cf7af-9590-43f3-a0bc-733f3407afcc": {
+        "id": "170cf7af-9590-43f3-a0bc-733f3407afcc",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  return notepad.selectedEmotion === 'happy';",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "4d7d1ff3-7c05-4f82-bcff-2c2c6005a1d6": {
+        "id": "4d7d1ff3-7c05-4f82-bcff-2c2c6005a1d6",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "Happy.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "fff1d1a8-eda1-4dac-a2bb-3650bcd8f209",
+        "decorators": [
+            "170cf7af-9590-43f3-a0bc-733f3407afcc"
+        ]
     }
 }

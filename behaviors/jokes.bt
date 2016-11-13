@@ -1,0 +1,65 @@
+{
+    "3": {
+        "id": 3,
+        "class": "Parallel",
+        "name": "",
+        "asset-pack": "core",
+        "children": [
+            "13bfef38-9b29-4174-acea-1a8705f2df9e",
+            "cc8e6bc0-e54a-4b17-b330-1ad97fc9bbe6"
+        ],
+        "decorators": [],
+        "options": {
+            "succeedOnOne": false
+        }
+    },
+    "meta": {
+        "version": 1
+    },
+    "13bfef38-9b29-4174-acea-1a8705f2df9e": {
+        "id": "13bfef38-9b29-4174-acea-1a8705f2df9e",
+        "class": "Listen",
+        "name": "",
+        "options": {
+            "getOptions": [
+                "() => {",
+                "    let options = {",
+                "        heyJibo: true,",
+                "        detectEnd: false,",
+                "        incremental: false,",
+                "        authenticateSpeaker: ''",
+                "    }",
+                "    return options;",
+                "}"
+            ],
+            "rule": "jokes.rule",
+            "onResult": [
+                "(listener) => {",
+                "    listener.on('cloud', function(asrResult, speakerIds) {",
+                "      notepad.joke = asrResult.NLParse.joke;",
+                "    });",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 3
+    },
+    "cc8e6bc0-e54a-4b17-b330-1ad97fc9bbe6": {
+        "id": "cc8e6bc0-e54a-4b17-b330-1ad97fc9bbe6",
+        "class": "TextToSpeechJs",
+        "name": "",
+        "options": {
+            "getWords": [
+                "(callback) => {",
+                "    callback(notepad.joke);",
+                "}"
+            ],
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": 3
+    }
+}

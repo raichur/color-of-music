@@ -186,6 +186,24 @@
                     "time": 21
                 }
             ]
+        },
+        {
+            "id": "edcfba1157684ed3b88f0ab948c95495",
+            "name": "Event",
+            "type": "Event",
+            "visible": true,
+            "locked": false,
+            "keyframes": [
+                {
+                    "value": {
+                        "Event": {
+                            "name": "fear",
+                            "payload": ""
+                        }
+                    },
+                    "time": 2
+                }
+            ]
         }
     ],
     "version": "0.6.0",
